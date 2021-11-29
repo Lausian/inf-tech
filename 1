@@ -1,7 +1,25 @@
+from time import time
+
+def timedec(func):
+    def timefunc(*args):
+        start = time()
+        func(*args)
+        print(f'Время работы функции:{time() - start}')
+    return timefunc
+
+def decor(func):
+    def name(*args):
+        print(f'Была вызвана функция {func.__name__}')
+        func(*args)
+    return name
+
+@timedec
+@decor
+
+def space(H, W):
+    SQFT_PER_ACRE = (W * H)/43560
+    print ('Вот площадь участка в акрах -',round(SQFT_PER_ACRE, 2))
 W = float(input('Введите ширину участка в футах: '))
 
 H = float(input('Введите длинну участка в футах: '))
-
-SQFT_PER_ACRE = (W * H)/43560
-
-print ('Вот площадь участка в акрах -',round(SQFT_PER_ACRE, 2))
+space(H, W)
